@@ -4,9 +4,18 @@ const router = Router()
 import ProductService from '../service/productoService.js'
 const Producto = new ProductService()
 
+
 router.get('/create',async(req,res) => {
     try {
         return res.render('productos/create')
+    } catch (err) {
+        console.log('error'+err)
+    }
+})
+router.get('/',async(req,res) => {
+    try {
+       const productos = await Producto.getProductos()
+        return res.render('productos/index',{productos})
     } catch (err) {
         console.log('error'+err)
     }
